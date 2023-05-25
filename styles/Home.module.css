@@ -1,3 +1,10 @@
+
+.nav {
+  border-right: 4px solid gray;
+  height: 100vh;
+  width:250px;
+ 
+}
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;

@@ -1,115 +1,121 @@
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { FiUpload } from 'react-icons/fi';
 
-export default function Home() {
+const MyPage = () => {
+  const [primaryColor, setPrimaryColor] = useState('#007bff');
+  const [secondaryColor, setSecondaryColor] = useState('#6c757d');
+  const [description, setDescription] = useState('Default Description');
+
+  const handleColorChange = (color, isPrimary) => {
+    if (isPrimary) {
+      setPrimaryColor(color);
+    } else {
+      setSecondaryColor(color);
+    }
+  };
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Container className="my-4">
+      <Row>
+        <Col>
+          <h1 className="text-center">AccessAI</h1>
+        </Col>
+      </Row>
+      <Row className="justify-content-center my-3">
+        <Col xs="auto">
+          <Button variant="primary" className="mx-2">Join Discord</Button>
+          <Button variant="secondary" className="mx-2">Post to Twitter</Button>
+          <Button variant="success" className="mx-2">Share on Facebook</Button>
+        </Col>
+      </Row>
+      <Row className="justify-content-center">
+        <Col sm={12}>
+          <Card className="my-4">
+            <Card.Body>
+              <div className="text-center">
+                <FiUpload size={48} />
+                <p className="mt-2">Drag PDF here</p>
+              </div>
+              <div className="d-flex justify-content-between align-items-center mt-3">
+                <div>
+                  <a href="#">Browse My Computer</a>
+                </div>
+                <div>
+                  <a href="#" className="ml-3">Link 1</a>
+                  <a href="#" className="ml-3">Link 2</a>
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      <Row className="justify-content-center">
+        <Col xs={12}>
+        <h4>Customize your Chatbot</h4>
+        </Col>
+        <Col sm={12} md={6} className="text-center my-4">
+          <h5>Colors</h5>
+          <div>
+            <span style={{ color: primaryColor }}>Primary</span>
+            <span className="mx-2">|</span>
+            <span style={{ color: secondaryColor }}>Secondary</span>
+          </div>
+          <h5 className="mt-4">Color Customizer</h5>
+          <div className="d-flex justify-content-center">
+            <input
+              type="color"
+              className="mx-2"
+              value={primaryColor}
+              onChange={(e) => handleColorChange(e.target.value, true)}
+            />
+            <input
+              type="color"
+              className="mx-2"
+              value={secondaryColor}
+              onChange={(e) => handleColorChange(e.target.value, false)}
+            />
+          </div>
+        </Col>
+        <Col sm={12} md={6} className="text-center my-4">
+          <div>
+            <h4>Tone (Optional)</h4>
+            <p>Description</p>
+            <textarea
+              className="form-control"
+              rows={5}
+              value={description}
+              onChange={handleDescriptionChange}
+            ></textarea>
+          </div>
+          <div>
+            <h4>Restriction message(optional)</h4>
+            <p>Description</p>
+            <textarea
+              className="form-control"
+              rows={5}
+              value={description}
+              onChange={handleDescriptionChange}
+            ></textarea>
+          </div>
+        </Col>
+        <Col>
+        <div className='d-flex justify-content-center'>
+          <Link href='/test'>
+          <Button>Generate Chatbot</Button>
 
-      <main>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          </Link>
         </div>
-      </main>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-        </a>
-      </footer>
+export default MyPage;
 
-      <style jsx>{`
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        footer img {
-          margin-left: 0.5rem;
-        }
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-decoration: none;
-          color: inherit;
-        }
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
-  )
-}
